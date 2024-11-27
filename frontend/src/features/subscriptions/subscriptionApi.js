@@ -4,7 +4,7 @@ import { selectCurrentToken } from '../auth/authSlice';  // Import the selector 
 export const subscriptionApi = createApi({
     reducerPath: 'subscriptionApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:1000/api/subscriptions',
+        baseUrl: 'https://blog-web-1h74.onrender.com/api/subscriptions',
         prepareHeaders: (headers, { getState }) => {
             // Get the token from Redux state
             const token = selectCurrentToken(getState());
