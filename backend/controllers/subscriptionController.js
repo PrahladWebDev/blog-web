@@ -1,4 +1,4 @@
-const Subscription = require('../models/subscriptionModel');
+import Subscription from '../models/subscriptionModel.js';
 
 // Activate Subscription (or renew it)
 const activateSubscription = async (req, res) => {
@@ -18,6 +18,7 @@ const activateSubscription = async (req, res) => {
     }
 };
 
+// Check Subscription Status
 const checkSubscriptionStatus = async (req, res) => {
     const userId = req.user._id;
 
@@ -44,5 +45,4 @@ const checkSubscriptionStatus = async (req, res) => {
     }
 };
 
-
-module.exports = { activateSubscription, checkSubscriptionStatus };
+export { activateSubscription, checkSubscriptionStatus };

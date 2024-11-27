@@ -1,6 +1,6 @@
-const Blog = require('../models/blogModel');
-const Subscription = require('../models/subscriptionModel');
-const upload = require('../utils/multerConfig');
+import Blog from '../models/blogModel.js';
+import Subscription from '../models/subscriptionModel.js';
+import upload from '../utils/multerConfig.js';
 
 // Admin: Create a Blog
 const createBlog = [
@@ -37,7 +37,9 @@ const getBlogContent = async (req, res) => {
     try {
         const subscription = await Subscription.findOne({ userId });
         if (!subscription || new Date() > subscription.expiresAt) {
-            return res.status(403).json({ message: 'Your subscription has expired. Please subscribe to access this content.' });
+            return res.status(403).json({
+                message: 'Your subscription has expired. Please subscribe to access this content.',
+            });
         }
 
         const blog = await Blog.findById(id);
@@ -51,4 +53,4 @@ const getBlogContent = async (req, res) => {
     }
 };
 
-module.exports = { createBlog, getAllBlogs, getBlogContent };
+export { createBlog, getAllBlogs, getBlogContent };

@@ -1,11 +1,12 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const bodyParser = require('body-parser');
-const connectDB = require('./config/db');
-const authRoutes = require('./routes/authRoutes');
-const blogRoutes = require('./routes/blogRoutes');
-const subscriptionRoutes = require('./routes/subscriptionRoutes');
-const cors = require('cors')
+import express from 'express';
+import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+import connectDB from './config/db.js';
+import authRoutes from './routes/authRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
+import subscriptionRoutes from './routes/subscriptionRoutes.js';
+import cors from 'cors';
+import path from 'path';
 
 // Load env variables
 dotenv.config();
@@ -15,6 +16,10 @@ connectDB();
 
 const app = express();
 app.use(cors());
+
+const __dirname = path.resolve();
+console.log(__dirname);
+
 // Middleware
 app.use(bodyParser.json());
 
@@ -29,5 +34,5 @@ app.get('/', (req, res) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 1000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

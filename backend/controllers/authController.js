@@ -1,5 +1,5 @@
-const User = require('../models/userModel');
-const { generateToken } = require('../config/jwt');
+import User from '../models/userModel.js';
+import { generateToken } from '../config/jwt.js';
 
 // Register User
 const registerUser = async (req, res) => {
@@ -48,4 +48,4 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser };
+export { registerUser, loginUser };

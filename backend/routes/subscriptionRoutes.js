@@ -1,10 +1,11 @@
-const express = require('express');
-const { activateSubscription, checkSubscriptionStatus } = require('../controllers/subscriptionController');
-const { protect } = require('../middlewares/authMiddleware');
+import express from 'express';
+import { activateSubscription, checkSubscriptionStatus } from '../controllers/subscriptionController.js';
+import { protect } from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
 
 // Routes
 router.post('/activate', protect, activateSubscription);
 router.get('/status', protect, checkSubscriptionStatus);
 
-module.exports = router;
+export default router;
