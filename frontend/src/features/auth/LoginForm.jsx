@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from './authSlice';
 import { selectCurrentUser, selectCurrentToken } from './authSlice';
 import './LoginForm.css'; // Import external CSS for styling
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -55,6 +57,10 @@ const LoginForm = () => {
                     {isLoading ? 'Logging in...' : 'Login'}
                 </button>
             </form>
+            {/* Register Link */}
+            <p className="register-link">
+                Don't have an account? <Link to="/register">Register here</Link>
+            </p>
         </div>
     );
 };
