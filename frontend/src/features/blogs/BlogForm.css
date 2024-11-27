@@ -1,0 +1,81 @@
+/* BlogForm.css */
+
+/* Container for the form */
+.blog-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading style */
+.blog-form-container h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form elements */
+.blog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input fields */
+.input-field {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Focus effect for input fields */
+.input-field:focus {
+    border-color: #007bff;
+}
+
+/* Submit button */
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for submit button */
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Message style (success or error) */
+.message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #f44336;
+}
+
+.message.success {
+    color: #4caf50;
+}
+
+@media (max-width: 768px) {
+    .blog-form-container {
+        padding: 15px;
+    }
+
+    .blog-form-container h3 {
+        font-size: 1.5rem;
+    }
+}
