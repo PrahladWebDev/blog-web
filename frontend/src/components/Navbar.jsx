@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '../features/auth/authSlice';
@@ -8,10 +8,17 @@ import './Navbar.css'; // Import external CSS file
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false); // State for toggling mobile menu
+    const [currentRole, setCurrentRole] = useState(null); // State to track user role dynamically
     const user = useSelector(selectCurrentUser);
     const { data } = useCheckSubscriptionStatusQuery();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            setCurrentRole(user.role); // Update the role when `user` changes
+        }
+    }, [user]);
 
     const handleLogout = () => {
         dispatch(logout());
@@ -34,7 +41,7 @@ const Navbar = () => {
                 <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
                     {user ? (
                         <>
-                            {user.role === 'admin' ? (
+                            {currentRole === 'admin' ? (
                                 <Link to="/admin" className="navbar-link">
                                     Admin Dashboard
                                 </Link>

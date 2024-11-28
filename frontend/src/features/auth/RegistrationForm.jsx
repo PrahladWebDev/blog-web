@@ -57,7 +57,7 @@ const RegistrationForm = () => {
                     onChange={(e) => setRole(e.target.value)}
                 >
                     <option value="user">User</option>
-                    <option value="admin">Admin</option>
+                    <option value="admin">Author</option>
                 </select>
                 <button className="submit-btn" type="submit">Register</button>
             </form>
