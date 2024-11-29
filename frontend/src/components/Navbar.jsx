@@ -8,7 +8,6 @@ import './Navbar.css'; // Import external CSS file
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false); // State for toggling mobile menu
-    const [currentRole, setCurrentRole] = useState(null); // State to track user role dynamically
     const user = useSelector(selectCurrentUser);
     const { data } = useCheckSubscriptionStatusQuery();
     const dispatch = useDispatch();
@@ -16,9 +15,13 @@ const Navbar = () => {
 
     useEffect(() => {
         if (user) {
-            setCurrentRole(user.role); // Update the role when `user` changes
+            if (user.role === 'admin') {
+                navigate('/admin'); // Redirect to admin dashboard
+            } else if (user.role === 'user' && data?.isActive) {
+                navigate('/user'); // Redirect to user dashboard
+            }
         }
-    }, [user]);
+    }, [user, data, navigate]); // Add `data` to the dependency array for subscription status
 
     const handleLogout = () => {
         dispatch(logout());
@@ -41,16 +44,15 @@ const Navbar = () => {
                 <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
                     {user ? (
                         <>
-                            {currentRole === 'admin' ? (
+                            {user.role === 'admin' && (
                                 <Link to="/admin" className="navbar-link">
                                     Admin Dashboard
                                 </Link>
-                            ) : (
-                                data?.isActive && (
-                                    <Link to="/user" className="navbar-link">
-                                        User Dashboard
-                                    </Link>
-                                )
+                            )}
+                            {user.role === 'user' && data?.isActive && (
+                                <Link to="/user" className="navbar-link">
+                                    User Dashboard
+                                </Link>
                             )}
                             <button className="navbar-button" onClick={handleLogout}>
                                 Logout
