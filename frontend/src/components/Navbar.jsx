@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUser } from '../features/auth/authSlice';
@@ -12,16 +12,6 @@ const Navbar = () => {
     const { data } = useCheckSubscriptionStatusQuery();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (user) {
-            if (user.role === 'admin') {
-                navigate('/admin'); // Redirect to admin dashboard
-            } else if (user.role === 'user' && data?.isActive) {
-                navigate('/user'); // Redirect to user dashboard
-            }
-        }
-    }, [user, data, navigate]); // Add `data` to the dependency array for subscription status
 
     const handleLogout = () => {
         dispatch(logout());
@@ -44,15 +34,16 @@ const Navbar = () => {
                 <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
                     {user ? (
                         <>
-                            {user.role === 'admin' && (
+                            {user.role === 'admin' ? (
                                 <Link to="/admin" className="navbar-link">
                                     Admin Dashboard
                                 </Link>
-                            )}
-                            {user.role === 'user' && data?.isActive && (
-                                <Link to="/user" className="navbar-link">
-                                    User Dashboard
-                                </Link>
+                            ) : (
+                                data?.isActive && (
+                                    <Link to="/user" className="navbar-link">
+                                        User Dashboard
+                                    </Link>
+                                )
                             )}
                             <button className="navbar-button" onClick={handleLogout}>
                                 Logout
